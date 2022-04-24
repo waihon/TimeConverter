@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    static let units = ["Seconds", "Minutes", "Hours", "Days"]
-    @State private var inputUnit = units[0]
-    @State private var outputUnit = units[0]
+    // The value represents the number of seconds (base unit) for each unit.
+    static let units = [
+        "Seconds": 1.0,
+        "Minutes": 60.0,
+        "Hours": 3_600.0,
+        "Days": 86_400
+    ]
+    static let baseUnit = "Seconds"
+
+    @State private var inputUnit = baseUnit
+    @State private var outputUnit = baseUnit
     @State private var convertFrom = 1.0
 
     var convertedTo: Double {
@@ -21,8 +29,8 @@ struct ContentView: View {
         Form {
             Section {
                 Picker("Input unit", selection: $inputUnit) {
-                    ForEach(Self.units, id: \.self) {
-                        Text("\($0)")
+                    ForEach(Self.units.sorted(by: >), id: \.key) { key, value in
+                        Text("\(key)")
                     }
                 }
                 .pickerStyle(.segmented)
@@ -32,8 +40,8 @@ struct ContentView: View {
 
             Section {
                 Picker("Output unit", selection: $outputUnit) {
-                    ForEach(Self.units, id: \.self) {
-                        Text("\($0)")
+                    ForEach(Self.units.sorted(by: >), id: \.key) { key, value in
+                        Text("\(key)")
                     }
                 }
                 .pickerStyle(.segmented)
