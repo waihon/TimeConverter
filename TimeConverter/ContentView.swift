@@ -22,7 +22,9 @@ struct ContentView: View {
     @State private var inputQuantity = 1.0
 
     var outputQuantity: Double {
-        inputQuantity
+        let inputInBaseUnit = Self.units[inputUnit]!
+        let outputInBaseUnit = Self.units[outputUnit]!
+        return inputQuantity * inputInBaseUnit / outputInBaseUnit
     }
 
     var body: some View {
