@@ -19,10 +19,10 @@ struct ContentView: View {
 
     @State private var inputUnit = baseUnit
     @State private var outputUnit = baseUnit
-    @State private var convertFrom = 1.0
+    @State private var inputQuantity = 1.0
 
-    var convertedTo: Double {
-        convertFrom
+    var outputQuantity: Double {
+        inputQuantity
     }
 
     var body: some View {
@@ -50,14 +50,14 @@ struct ContentView: View {
             }
 
             Section {
-                TextField("Convert From", value: $convertFrom, format: .number)
+                TextField("Convert From", value: $inputQuantity, format: .number)
                     .keyboardType(.decimalPad)
             } header: {
                 Text("Convert From")
             }
 
             Section {
-                Text("\(convertedTo.formatted())")
+                Text("\(outputQuantity.formatted())")
             } header: {
                 Text("Converted To")
             }
