@@ -30,6 +30,13 @@ struct ContentView: View {
     var body: some View {
         Form {
             Section {
+                TextField("Input Quantity", value: $inputQuantity, format: .number)
+                    .keyboardType(.decimalPad)
+            } header: {
+                Text("Input Quantity")
+            }
+
+            Section {
                 Picker("Input unit", selection: $inputUnit) {
                     ForEach(Self.units.sorted(by: >), id: \.key) { key, value in
                         Text("\(key)")
@@ -41,6 +48,12 @@ struct ContentView: View {
             }
 
             Section {
+                Text("\(outputQuantity.formatted())")
+            } header: {
+                Text("Output Quantity")
+            }
+
+            Section {
                 Picker("Output unit", selection: $outputUnit) {
                     ForEach(Self.units.sorted(by: >), id: \.key) { key, value in
                         Text("\(key)")
@@ -49,19 +62,6 @@ struct ContentView: View {
                 .pickerStyle(.segmented)
             } header: {
                 Text("Output Unit")
-            }
-
-            Section {
-                TextField("Convert From", value: $inputQuantity, format: .number)
-                    .keyboardType(.decimalPad)
-            } header: {
-                Text("Convert From")
-            }
-
-            Section {
-                Text("\(outputQuantity.formatted())")
-            } header: {
-                Text("Converted To")
             }
         }
     }
